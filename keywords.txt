@@ -1,0 +1,56 @@
+#######################################
+# Syntax Coloring Map
+#######################################
+# https://arduino.github.io/arduino-cli/0.21/library-specification/#keywordstxt-format
+# KEYWORD1 Classes, datatypes, and C++ keywords
+# KEYWORD2 Methods and functions
+# KEYWORD3 setup and loop functions, as well as the Serial keywords
+# LITERAL1 Constants
+# LITERAL2 Built-in variables (unused by default)
+
+
+#######################################
+# Classes, datatypes (KEYWORD1)
+#######################################
+ENS210						KEYWORD1
+ens210						KEYWORD1
+Sensor						KEYWORD1
+Result						KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+begin						KEYWORD2
+isConnected					KEYWORD2
+update						KEYWORD2
+singleShotMeasure			KEYWORD2
+startContinuousMeasure		KEYWORD2
+stopContinuousMeasure		KEYWORD2
+setLowPower					KEYWORD2
+reset						KEYWORD2
+getPartId					KEYWORD2
+getDieRev					KEYWORD2
+getUid						KEYWORD2
+getTempKelvin				KEYWORD2
+getTempCelsius				KEYWORD2
+getTempFahrenheit			KEYWORD2
+getHumidityPercent			KEYWORD2
+getAbsoluteHumidityPercent	KEYWORD2
+getDataT					KEYWORD2
+getDataH					KEYWORD2
+getStatusT					KEYWORD2
+getStatusH					KEYWORD2
+enableDebugging				KEYWORD2
+disableDebugging			KEYWORD2
+
+######################################
+# Constants (LITERAL1)
+#######################################
+
+STATUS_I2CERROR				LITERAL1
+STATUS_CRCERROR				LITERAL1
+STATUS_INVALID				LITERAL1
+STATUS_OK					LITERAL1
+TEMPERATURE					LITERAL1
+HUMIDITY					LITERAL1
+TEMPERATURE_AND_HUMIDITY 	LITERAL1
