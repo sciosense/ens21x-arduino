@@ -42,11 +42,11 @@ void loop()
         float temperatureCelsius = ens210.getTempCelsius();
         float humidityPercent    = ens210.getHumidityPercent();
 
-        Serial.print("Temperature: ");
+        Serial.print("Temperature:");
         Serial.print(temperatureCelsius);
         Serial.print("°C\t");
 
-        Serial.print("Humidity: ");
+        Serial.print("Humidity:");
         Serial.print(humidityPercent);
         Serial.println("%");
         ens210.getStatusH();
