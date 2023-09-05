@@ -1,7 +1,7 @@
 # ScioSense ENS21x Arduino Library
 Arduino library for the ENS21x temperature & humidity sensor family with I2C interface from ScioSense.
 
-<img src="images/ens21x.png" width="200">
+<img src="images/ens21x.png" width="400">
 
 The ENS21x is a family of high-performance digital temperature and humidity sensors produced by
 [ScioSense](http://www.sciosense.com). With industry leading accuracies down to 0.1°C temperature and 0.8% relative 
