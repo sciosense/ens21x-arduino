@@ -12,9 +12,8 @@ automation and instrumentation.
 The ENS21x family includes the ENS210, ENS211, ENS212, ENS213A and the ENS215.
 
 ## Links
-* [Further information about the ENS21x](https://www.sciosense.com/products/relative-humidity-and-temperature-sensors/ens210-relative-humidity-and-temperature-sensor/)  
-* [Datasheet](https://www.sciosense.com/wp-content/uploads/2023/06/SC-001822-DS-3-ENS21x-Datasheet.pdf)
-* [Application notes](https://www.sciosense.com/wp-content/uploads/documents/SC-001928-AN-1-ENS21xA-Design-Guidelines.pdf) 
+* [Further information about the ENS21x](https://www.sciosense.com/ens21x-family-of-high-performance-digital-temperature-and-humidity-sensors/)
+* [Datasheet](https://www.sciosense.com/wp-content/uploads/2023/12/ENS21x-Datasheet.pdf)
 * Buy the ENS210 on [Mouser](https://mou.sr/3P3DWmK) or [Digikey](https://www.digikey.nl/en/products/detail/sciosense/ENS210-LQFM/6490747)
 * Buy the ENS210 evaluation kit on [Mouser](https://mou.sr/44GNQAi)
 
