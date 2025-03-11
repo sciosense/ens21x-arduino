@@ -3,8 +3,6 @@
 
 #include "ens211.h"
 
-using namespace ScioSense;
-
 ENS211 ens211;
 
 void setup()
@@ -14,6 +12,7 @@ void setup()
 
     Wire.begin();
     ens211.begin();
+    ens211.init();
 
     if (ens211.isConnected() == false)
     {
@@ -24,7 +23,7 @@ void setup()
 
 void loop()
 {
-    if (ens211.singleShotMeasure() == ENS211::Result::STATUS_OK)
+    if (ens211.singleShotMeasure() == RESULT_OK)
     {
         float temperatureCelsius = ens211.getTempCelsius();
         float humidityPercent    = ens211.getHumidityPercent();

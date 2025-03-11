@@ -3,8 +3,6 @@
 
 #include "ens212.h"
 
-using namespace ScioSense;
-
 ENS212 ens212;
 
 void setup()
@@ -14,6 +12,7 @@ void setup()
 
     Wire.begin();
     ens212.begin();
+    ens212.init();
 
     if (ens212.isConnected() == false)
     {
@@ -24,7 +23,7 @@ void setup()
 
 void loop()
 {
-    if (ens212.singleShotMeasure() == ENS212::Result::STATUS_OK)
+    if (ens212.singleShotMeasure() == RESULT_OK)
     {
         float temperatureCelsius = ens212.getTempCelsius();
         float humidityPercent    = ens212.getHumidityPercent();

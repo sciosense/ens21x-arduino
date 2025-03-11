@@ -14,6 +14,14 @@
 #######################################
 ENS210						KEYWORD1
 ens210						KEYWORD1
+ENS211						KEYWORD1
+ens211						KEYWORD1
+ENS212						KEYWORD1
+ens212						KEYWORD1
+ENS213a						KEYWORD1
+ens213a						KEYWORD1
+ENS215						KEYWORD1
+ens215						KEYWORD1
 Sensor						KEYWORD1
 Result						KEYWORD1
 

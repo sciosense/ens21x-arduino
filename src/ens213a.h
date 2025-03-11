@@ -3,26 +3,23 @@
 
 #include "ens21x.h"
 
-namespace ScioSense
+class ENS213A : public ENS21x
 {
-    class ENS213A : public ENS21x
+public:
+    ENS213A() : ENS21x()
     {
-    public:
-        ENS213A() : ENS21x()
-        {
-            debugPrefix = "ENS213A debug -- ";
-        }
+        debugPrefix = "ENS213A debug -- ";
+    }
 
-        bool isConnected() override
-        {
-            return partId ==  0xa213;
-        }
+    bool isConnected() override
+    {
+        return Ens213a_isConnected(this);
+    }
 
-        bool begin(TwoWire& twoWire = Wire, uint8_t address= 0x46) override
-        {
-            return ENS21x::begin(twoWire, address);
-        }
-    };
-}
+    void begin(TwoWire* twoWire = &Wire, uint8_t address = 0x46) override
+    {
+        ENS21x::begin(twoWire, address);
+    }
+};
 
 #endif //SCIOSENSE_ENS213A_H
