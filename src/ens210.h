@@ -3,26 +3,23 @@
 
 #include "ens21x.h"
 
-namespace ScioSense
+class ENS210 : public ENS21x
 {
-    class ENS210 : public ENS21x
+public:
+    ENS210() : ENS21x()
     {
-    public:
-        ENS210() : ENS21x()
-        {
-            debugPrefix = "ENS210 debug -- ";
-        }
+        debugPrefix = "ENS210 debug -- ";
+    }
 
-        bool isConnected() override
-        {
-            return partId ==  0x0210;
-        }
+    bool isConnected() override
+    {
+        return Ens210_isConnected(this);
+    }
 
-        bool begin(TwoWire& twoWire = Wire, uint8_t address= 0x43) override
-        {
-            return ENS21x::begin(twoWire, address);
-        }
-    };
-}
+    void begin(TwoWire* twoWire = &Wire, uint8_t address = 0x43) override
+    {
+        ENS21x::begin(twoWire, address);
+    }
+};
 
 #endif //SCIOSENSE_ENS210_H

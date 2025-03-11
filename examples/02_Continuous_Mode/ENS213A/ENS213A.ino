@@ -3,8 +3,6 @@
 
 #include "ens213a.h"
 
-using namespace ScioSense;
-
 ENS213A ens213a;
 
 void setup()
@@ -14,20 +12,19 @@ void setup()
 
     Wire.begin();
     ens213a.begin();
+    ens213a.init();
 
     if (ens213a.isConnected() == false)
     {
-        Serial.println("Error -- The ENS213a is not connected.");
+        Serial.println("Error -- The ENS213A is not connected.");
         while(1);
     }
 
-    ens213a.reset();
-
     Serial.print("Starting continous mode..");
-    while (ens213a.startContinuousMeasure() != ENS213A::Result::STATUS_OK)
+    while (ens213a.startContinuousMeasure() != RESULT_OK)
     {
         Serial.print(".");
-        delay(ENS213A::SystemTiming::BOOTING);
+        delay(ENS21X_SYSTEM_TIMING_BOOTING);
     }
     Serial.println(" Done!");
 
@@ -37,7 +34,9 @@ void setup()
 
 void loop()
 {
-    if (ens213a.update() == ENS213A::Result::STATUS_OK)
+    ens213a.wait();
+
+    if (ens213a.update() == RESULT_OK)
     {
         float temperatureCelsius = ens213a.getTempCelsius();
         float humidityPercent    = ens213a.getHumidityPercent();
@@ -49,6 +48,5 @@ void loop()
         Serial.print("Humidity:");
         Serial.print(humidityPercent);
         Serial.println("%");
-        ens213a.getStatusH();
     }
 }

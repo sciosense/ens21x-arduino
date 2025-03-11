@@ -3,8 +3,6 @@
 
 #include "ens213a.h"
 
-using namespace ScioSense;
-
 ENS213A ens213a;
 
 void setup()
@@ -14,6 +12,7 @@ void setup()
 
     Wire.begin();
     ens213a.begin();
+    ens213a.init();
 
     if (ens213a.isConnected() == false)
     {
@@ -24,7 +23,7 @@ void setup()
 
 void loop()
 {
-    if (ens213a.singleShotMeasure() == ENS213A::Result::STATUS_OK)
+    if (ens213a.singleShotMeasure() == RESULT_OK)
     {
         float temperatureCelsius = ens213a.getTempCelsius();
         float humidityPercent    = ens213a.getHumidityPercent();

@@ -3,20 +3,18 @@
 
 #include "ens212.h"
 
-using namespace ScioSense;
-
 ENS212 ens212;
-ENS212::Result result;
+Result result;
 
-void validateData(ENS212::Result result)
+void validateData(Result result)
 {
     switch (result)
     {
-        case ENS212::Result::STATUS_I2C_ERROR: Serial.println("i2c-error");       break;
-        case ENS212::Result::STATUS_CRC_ERROR: Serial.println("crc-error");       break;
-        case ENS212::Result::STATUS_INVALID:   Serial.println("data-invalid");    break;
-        case ENS212::Result::STATUS_OK:        Serial.println("ok");              break;
-        default:                               Serial.println("unknown-status");  break;
+        case RESULT_IO_ERROR:       Serial.println("i2c-error");       break;
+        case RESULT_CHECKSUM_ERROR: Serial.println("crc-error");       break;
+        case RESULT_INVALID:        Serial.println("data-invalid");    break;
+        case RESULT_OK:             Serial.println("ok");              break;
+        default:                    Serial.println("unknown-status");  break;
     }
 }
 
@@ -29,6 +27,7 @@ void setup()
 
     Wire.begin();
     ens212.begin();
+    ens212.init();
 
     if (ens212.isConnected() == false)
     {
@@ -36,45 +35,49 @@ void setup()
         while(1);
     }
 
-    if (ens212.reset() != ENS212::Result::STATUS_OK)
+    if (ens212.reset() != RESULT_OK)
     {
         Serial.println("Error -- Failed to reset the device.");
         while(1);
     }
 
-    if (ens212.singleShotMeasure() != ENS212::Result::STATUS_OK)
+    result = ens212.singleShotMeasure();
+    if (result != RESULT_OK)
     {
         Serial.println("Error -- Single shot measure failed.");
+        validateData(result);
 
         Serial.print("Temperature status: ");
-        validateData(ens212.getStatusT());
+        validateData(Ens21x_CheckData(ens212.dataBuffer));
 
         Serial.print("Humidity status: ");
-        validateData(ens212.getStatusH());
+        validateData(Ens21x_CheckData(ens212.dataBuffer + 3));
 
         while(1);
     }
 
-    if (ens212.startContinuousMeasure() != ENS212::Result::STATUS_OK)
+    if (ens212.startContinuousMeasure() != RESULT_OK)
     {
         Serial.println("Error -- Starting continuous mode failed.");
         while(1);
     }
 
-    if (ens212.update() != ENS212::Result::STATUS_OK)
+    result = ens212.update();
+    if (result != RESULT_OK)
     {
         Serial.println("Error -- Updating measurement data failed.");
+        validateData(result);
 
         Serial.print("Temperature status: ");
-        validateData(ens212.getStatusT());
+        validateData(Ens21x_CheckData(ens212.dataBuffer));
 
         Serial.print("Humidity status: ");
-        validateData(ens212.getStatusH());
+        validateData(Ens21x_CheckData(ens212.dataBuffer + 3));
 
         while(1);
     }
 
-    if (ens212.stopContinuousMeasure() != ENS212::Result::STATUS_OK)
+    if (ens212.stopContinuousMeasure() != RESULT_OK)
     {
         Serial.println("Error -- Stopping continuous mode failed.");
         while(1);
@@ -91,7 +94,7 @@ void setup()
 
 void loop()
 {
-    if (ens212.singleShotMeasure() == ENS212::Result::STATUS_OK)
+    if (ens212.singleShotMeasure() == RESULT_OK)
     {
         float temperatureCelsius = ens212.getTempCelsius();
         float humidityPercent    = ens212.getHumidityPercent();
@@ -103,6 +106,5 @@ void loop()
         Serial.print("Humidity: ");
         Serial.print(humidityPercent);
         Serial.println("%");
-        ens212.getStatusH();
     }
 }

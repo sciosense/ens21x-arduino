@@ -3,8 +3,6 @@
 
 #include "ens210.h"
 
-using namespace ScioSense;
-
 ENS210 ens210;
 
 void setup()
@@ -14,6 +12,7 @@ void setup()
 
     Wire.begin();
     ens210.begin();
+    ens210.init();
 
     if (ens210.isConnected() == false)
     {
@@ -24,7 +23,7 @@ void setup()
 
 void loop()
 {
-    if (ens210.singleShotMeasure() == ENS210::Result::STATUS_OK)
+    if (ens210.singleShotMeasure() == RESULT_OK)
     {
         float temperatureCelsius = ens210.getTempCelsius();
         float humidityPercent    = ens210.getHumidityPercent();

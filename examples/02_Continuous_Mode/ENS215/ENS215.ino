@@ -3,8 +3,6 @@
 
 #include "ens215.h"
 
-using namespace ScioSense;
-
 ENS215 ens215;
 
 void setup()
@@ -14,6 +12,7 @@ void setup()
 
     Wire.begin();
     ens215.begin();
+    ens215.init();
 
     if (ens215.isConnected() == false)
     {
@@ -21,13 +20,11 @@ void setup()
         while(1);
     }
 
-    ens215.reset();
-
     Serial.print("Starting continous mode..");
-    while (ens215.startContinuousMeasure() != ENS215::Result::STATUS_OK)
+    while (ens215.startContinuousMeasure() != RESULT_OK)
     {
         Serial.print(".");
-        delay(ENS215::SystemTiming::BOOTING);
+        delay(ENS21X_SYSTEM_TIMING_BOOTING);
     }
     Serial.println(" Done!");
 
@@ -37,7 +34,9 @@ void setup()
 
 void loop()
 {
-    if (ens215.update() == ENS215::Result::STATUS_OK)
+    ens215.wait();
+
+    if (ens215.update() == RESULT_OK)
     {
         float temperatureCelsius = ens215.getTempCelsius();
         float humidityPercent    = ens215.getHumidityPercent();
@@ -49,6 +48,5 @@ void loop()
         Serial.print("Humidity:");
         Serial.print(humidityPercent);
         Serial.println("%");
-        ens215.getStatusH();
     }
 }
